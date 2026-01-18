@@ -11,18 +11,14 @@ class NetworkService {
     static let shared = NetworkService()
     
     private let baseURL = "https://newsapi.org/v2"
-    // Note: Replace with your NewsAPI key or use a demo endpoint
-    // Get your free API key at https://newsapi.org/
     private let apiKey = "3a367a2332c5487b951a63a3c531f57a"
     
     private init() {}
     
     func fetchTopHeadlines() async throws -> NewsResponse {
-        // Use real API if apiKey is set, otherwise use mock data
         guard !apiKey.isEmpty,
               apiKey == "3a367a2332c5487b951a63a3c531f57a",
               let url = URL(string: "\(baseURL)/top-headlines?country=us&apiKey=\(apiKey)") else {
-            // Fallback to mock data
             return try await fetchMockNews()
         }
         
@@ -31,14 +27,12 @@ class NetworkService {
             let newsResponse = try JSONDecoder().decode(NewsResponse.self, from: data)
             return newsResponse
         } catch {
-            // If API call fails, use mock data
             return try await fetchMockNews()
         }
     }
     
     private func fetchMockNews() async throws -> NewsResponse {
-        // Mock news data for demonstration
-        // Simulate network delay
+        
         try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
         
         let mockArticles = [

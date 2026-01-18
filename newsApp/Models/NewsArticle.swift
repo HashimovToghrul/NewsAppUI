@@ -14,7 +14,7 @@ struct NewsResponse: Codable {
 }
 
 struct NewsArticle: Codable, Identifiable {
-    var id: String { url } // Use URL as unique identifier
+    var id: String { url } 
     let title: String
     let description: String?
     let url: String
